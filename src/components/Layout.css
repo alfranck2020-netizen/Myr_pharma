@@ -1,0 +1,154 @@
+/* ── APP SHELL ──────────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ────────────────────────────────────────────────────── */
+.sidebar {
+  width: 220px;
+  background: var(--teal-900);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  z-index: 200;
+  transition: transform 0.25s ease;
+}
+
+.sb-logo {
+  padding: 16px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.sb-icon {
+  width: 32px; height: 32px;
+  background: var(--amber);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: #fff;
+  flex-shrink: 0;
+}
+.sb-name { font-size: 13px; font-weight: 700; color: #fff; }
+.sb-sub  { font-size: 9px; color: var(--teal-200); letter-spacing: 1.5px; text-transform: uppercase; }
+
+.sb-section { padding: 12px 8px 2px; }
+.sb-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--teal-200);
+  padding: 0 6px; margin-bottom: 3px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 8px; border-radius: 6px;
+  color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s; margin-bottom: 1px;
+  user-select: none;
+}
+.nav-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+.nav-item.active { background: var(--amber); color: #fff; font-weight: 600; }
+.nav-ico { font-size: 14px; width: 18px; text-align: center; }
+
+.sb-foot {
+  margin-top: auto; padding: 12px 10px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; gap: 8px;
+  flex-shrink: 0;
+}
+.sb-avatar {
+  width: 28px; height: 28px; background: var(--teal-500);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 11px; font-weight: 700;
+  color: #fff; flex-shrink: 0;
+}
+.sb-uname { font-size: 11px; font-weight: 600; color: #fff; }
+.sb-urole { font-size: 9px; color: var(--teal-200); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sb-logout {
+  background: rgba(255,255,255,0.08); border: none;
+  color: rgba(255,255,255,0.6);
+  width: 28px; height: 28px; border-radius: 6px;
+  cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sb-logout:hover { background: rgba(255,255,255,0.16); color: #fff; }
+
+/* ── MAIN CONTENT ───────────────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+/* ── MOBILE TOPBAR (hidden on desktop) ─────────────────────────── */
+.mobile-bar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 52px;
+  background: var(--teal-900);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.mobile-menu-btn {
+  background: none; border: none; color: #fff;
+  font-size: 22px; cursor: pointer; padding: 6px;
+  display: flex; align-items: center;
+}
+.mobile-title { color: #fff; font-weight: 700; font-size: 14px; }
+.mobile-theme-btn {
+  background: none; border: none; font-size: 20px; cursor: pointer; padding: 4px;
+}
+
+/* ── DESKTOP THEME TOGGLE (hidden on mobile) ────────────────────── */
+.desktop-theme {
+  position: absolute; top: 12px; right: 16px; z-index: 10;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 15px;
+}
+
+/* ── OVERLAY ────────────────────────────────────────────────────── */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 150;
+}
+
+/* ── MOBILE: ≤ 768px ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* sidebar becomes a fixed drawer, hidden off-screen left */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    height: 100dvh;
+    transform: translateX(-100%);
+  }
+  .sidebar.sidebar-open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+  }
+
+  /* show mobile topbar */
+  .mobile-bar { display: flex; }
+
+  /* hide desktop theme button */
+  .desktop-theme { display: none; }
+
+  /* show overlay when sidebar open */
+  .sidebar-overlay { display: block; }
+}
