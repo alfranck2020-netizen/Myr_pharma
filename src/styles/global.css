@@ -63,6 +63,8 @@ body {
 .badge-orange::before { background: var(--orange); }
 .badge-teal   { background: var(--teal-50);  color: var(--teal-700); }
 .badge-teal::before   { background: var(--teal-500); }
+.badge-amber  { background: var(--amber-l);  color: var(--amber-d); }
+.badge-amber::before  { background: var(--amber); }
 
 /* ── CHIP ── */
 .chip {
