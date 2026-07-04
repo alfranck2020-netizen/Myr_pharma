@@ -248,7 +248,10 @@ BEGIN
   ]
   LOOP
     EXECUTE format(
-      'CREATE POLICY IF NOT EXISTS "auth_only_%s" ON %I
+      'DROP POLICY IF EXISTS "auth_only_%s" ON %I;', tbl, tbl
+    );
+    EXECUTE format(
+      'CREATE POLICY "auth_only_%s" ON %I
        FOR ALL TO authenticated USING (true) WITH CHECK (true);',
       tbl, tbl
     );
